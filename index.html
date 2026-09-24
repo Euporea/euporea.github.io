@@ -72,6 +72,22 @@ p.tag{margin:.75rem 0 .35rem;font-size:.85rem}
 .skills-col .chips li{transition:box-shadow .2s ease,border-color .2s ease}
 .skills-col .chips li:hover{border-color:var(--accent);box-shadow:0 0 8px 2px rgba(63,185,80,.45)}
 
+/* hearth tab */
+.hearth-grid{display:grid;grid-template-columns:1.7fr 1fr;gap:2rem;align-items:center}
+@media(max-width:64rem){.hearth-grid{grid-template-columns:1fr}}
+.hearth-video{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--panel)}
+.hearth-video video{display:block;width:100%;aspect-ratio:16/9;object-fit:cover}
+.hearth-text .chips li{transition:box-shadow .2s ease,border-color .2s ease}
+.hearth-text .chips li:hover{border-color:var(--accent);box-shadow:0 0 8px 2px rgba(63,185,80,.45)}
+.feature-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:2rem}
+@media(max-width:48rem){.feature-grid{grid-template-columns:1fr}}
+.feature-grid .card{height:auto}
+.feature-grid h3{color:var(--accent)}
+.feature-grid ul{color:var(--muted);padding-left:1.2rem;margin:.5rem 0 0}
+.status{display:inline-flex;align-items:center;gap:.5rem;border:1px solid var(--line);border-radius:999px;padding:.25rem .8rem;font-size:.85rem;background:var(--panel)}
+.status::before{content:"";width:.5rem;height:.5rem;border-radius:50%;background:var(--accent);box-shadow:0 0 6px var(--accent)}
+.hearth-text p{color:var(--muted);margin:1rem 0 0}
+
 /* project summary cards + lightbox */
 .proj-card{cursor:pointer;position:relative}
 .proj-card .body p{margin-bottom:0}
@@ -135,6 +151,7 @@ p.tag{margin:.75rem 0 .35rem;font-size:.85rem}
 <nav class="side-nav">
   <button data-target="about">aboutMe</button>
   <button data-target="projects">myProjects</button>
+  <button data-target="hearth">Hearth</button>
   <button data-target="skills">myExperience</button>
 </nav>
 <button id="prevBtn" class="page-btn" aria-label="Previous section">&#9650; Previous</button>
@@ -223,6 +240,38 @@ p.tag{margin:.75rem 0 .35rem;font-size:.85rem}
   <p>A cyberpunk psychological-horror first-person shooter where your grip on your own humanity is a core mechanic.</p>
   <ul class="chips" style="flex-wrap:wrap"><li>Godot 4</li><li>GDScript</li><li>FPS</li></ul>
 </template>
+
+<section id="hearth">
+<div class="content">
+<h2>Hearth - Home Server Management</h2>
+<div class="hearth-grid">
+  <div class="hearth-video">
+    <video src="img/hearth.mp4" autoplay loop muted playsinline></video>
+  </div>
+  <div class="hearth-text">
+    <span class="status">Actively in development</span>
+    <p>Hearth is a control panel for my self-hosted home server. One web app to start and stop game servers, run a media library, and use local AI tools for chat, voice, and image generation. The heavy GPU services spin up on demand and shut themselves down when idle thanks to everything being containerized with Docker.</p>
+    <ul class="chips" style="flex-wrap:wrap;margin:1rem 0 0"><li>Python</li><li>FastAPI</li><li>Docker</li><li>Discord bot</li></ul>
+  </div>
+</div>
+<div class="feature-grid">
+  <div class="card"><div class="body">
+    <h3>Recently completed</h3>
+    <ul>
+      <li>Containerized the whole stack with Docker</li>
+      <li>Added game server hosting to the stack</li>
+      <li>Added a Discord bot so anyone with permission can manage servers from their Discord client</li>
+    </ul>
+  </div></div>
+  <div class="card"><div class="body">
+    <h3>Currently planned</h3>
+    <ul>
+      <li>3D character chatbot "FaceTime" style back-and-forth conversation.</li>
+    </ul>
+  </div></div>
+</div>
+</div>
+</section>
 
 <section id="skills">
 <div class="content">
