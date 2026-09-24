@@ -25,7 +25,8 @@ section.fade-out{opacity:0}
 .page-btn:hover{background:#1c222b;border-color:var(--accent);box-shadow:0 0 8px 2px rgba(63,185,80,.45)}
 .page-btn:disabled{opacity:0;pointer-events:none}
 #prevBtn{top:1.25rem}
-#nextBtn{bottom:1.25rem}
+#nextBtn{bottom:3.25rem}
+.site-footer{position:fixed;bottom:0;left:11rem;right:0;padding:.6rem 1rem;text-align:center;font-size:.8rem;color:var(--muted);background:rgba(13,17,23,.92);backdrop-filter:blur(6px);border-top:1px solid var(--line);z-index:15}
 h1{margin:0;font-size:2.5rem}
 h1::before{content:"$ ";color:var(--accent)}
 h1::after{content:"";display:block;width:3.5rem;height:3px;background:var(--accent);border-radius:2px;margin-top:.6rem}
@@ -125,7 +126,8 @@ p.tag{margin:.75rem 0 .35rem;font-size:.85rem}
   .side-nav button{padding:.4rem .7rem;white-space:nowrap;border-left:none;border-bottom:3px solid transparent;border-radius:6px 6px 0 0}
   .side-nav button.active{border-left:none;border-bottom-color:var(--accent);border-radius:6px 6px 0 0}
   /* paging doesn't work well on touch screens: drop the prev/next buttons and let the page scroll instead */
-  main{margin-left:0;min-height:0;justify-content:flex-start;padding:1.5rem 1.25rem;padding-top:5rem;gap:3.5rem}
+  main{margin-left:0;min-height:0;justify-content:flex-start;padding:1.5rem 1.25rem;padding-top:5rem;padding-bottom:3.5rem;gap:3.5rem}
+  .site-footer{left:0}
   .page-btn{display:none}
   section,section.active,section.fade-out{display:flex;opacity:1}
   h1{font-size:1.9rem}
@@ -324,6 +326,7 @@ p.tag{margin:.75rem 0 .35rem;font-size:.85rem}
 </section>
 
 </main>
+<footer class="site-footer">&copy; <span id="year">2026</span> Sean Clarke. All rights reserved.</footer>
 <div id="lightbox" class="lightbox" aria-hidden="true">
   <div class="lightbox-panel">
     <button class="lightbox-close" aria-label="Close">&times;</button>
@@ -362,6 +365,7 @@ nextBtn.addEventListener('click',function(){ go(current+1); });
 
 // below 48rem, CSS makes all sections visible and the page scrolls normally —
 // so nav clicks there just scroll to the section instead of paging through it
+document.getElementById('year').textContent=new Date().getFullYear();
 function isMobile(){ return window.matchMedia('(max-width:48rem)').matches; }
 navBtns.forEach(function(b,idx){
   b.addEventListener('click',function(){
@@ -419,5 +423,6 @@ lightbox.querySelector('.lightbox-close').addEventListener('click',closeLightbox
 lightbox.addEventListener('click',function(e){ if(e.target===lightbox) closeLightbox(); });
 document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeLightbox(); });
 </script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "5fe3a69a4a2d48fd8ffd1a5743b8b7fc"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>
