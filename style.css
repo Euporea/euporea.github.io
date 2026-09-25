@@ -1,0 +1,749 @@
+/* ==========================================================================
+   Theme
+   ========================================================================== */
+
+:root {
+  --bg: #0d1117;
+  --panel: #161b22;
+  --panel-hover: #1c222b;
+  --line: #30363d;
+  --fg: #e6edf3;
+  --muted: #8b949e;
+  --accent: #3fb950;
+  --accent-tint: rgba(63, 185, 80, 0.1);
+  --glow: 0 0 8px 2px rgba(63, 185, 80, 0.45);
+  --sidebar-width: 11rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font: 16px/1.65 ui-monospace, SFMono-Regular, Consolas, monospace;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+
+/* ==========================================================================
+   Headings and small text
+   ========================================================================== */
+
+h1 {
+  margin: 0;
+  font-size: 2.5rem;
+}
+
+h1::before {
+  content: "$ ";
+  color: var(--accent);
+}
+
+h1::after {
+  content: "";
+  display: block;
+  width: 3.5rem;
+  height: 3px;
+  margin-top: 0.6rem;
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+h2 {
+  margin: 0 0 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--muted);
+}
+
+h2::before {
+  content: "## ";
+  color: var(--accent);
+}
+
+h2::after {
+  content: "";
+  display: block;
+  width: 2.5rem;
+  height: 2px;
+  margin-top: 0.5rem;
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+.accent {
+  color: var(--accent);
+}
+
+/* hero subtitle under the name */
+.tag {
+  margin: 0.5rem 0 0;
+  font-size: 1.1rem;
+  color: var(--muted);
+}
+
+/* small grey label: dates on cards, group names above skill chips */
+p.meta {
+  margin: 0.75rem 0 0.35rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.hint {
+  margin: -1rem 0 1.5rem;
+  color: var(--muted);
+}
+
+
+/* ==========================================================================
+   Layout: side nav, page buttons, footer
+   ========================================================================== */
+
+.side-nav {
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: var(--sidebar-width);
+  padding: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.25rem;
+  z-index: 20;
+}
+
+.side-nav button {
+  padding: 0.4rem 1.25rem;
+  background: none;
+  border: none;
+  border-left: 3px solid transparent;
+  border-radius: 0 6px 6px 0;
+  color: var(--muted);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: box-shadow 0.2s ease, color 0.2s ease;
+}
+
+.side-nav button:hover {
+  color: var(--fg);
+  box-shadow: var(--glow);
+}
+
+.side-nav button.active {
+  color: var(--accent);
+  border-left-color: var(--accent);
+  background: var(--accent-tint);
+}
+
+main {
+  margin-left: var(--sidebar-width);
+  min-height: 100vh;
+  padding: 3rem 3.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* only one section is shown at a time; app.js swaps the .active class */
+section {
+  display: none;
+  flex-direction: column;
+}
+
+section.active {
+  display: flex;
+}
+
+.content {
+  width: 100%;
+  max-width: 82rem;
+  margin: 0 auto;
+}
+
+.page-btn {
+  position: fixed;
+  /* centre of the area to the right of the sidebar */
+  left: calc(var(--sidebar-width) + (100% - var(--sidebar-width)) / 2);
+  transform: translateX(-50%);
+  padding: 0.6rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--accent);
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+  z-index: 20;
+  transition: opacity 0.3s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.page-btn:hover {
+  background: var(--panel-hover);
+  border-color: var(--accent);
+  box-shadow: var(--glow);
+}
+
+.page-btn:disabled {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#prevBtn {
+  top: 1.25rem;
+}
+
+#nextBtn {
+  bottom: 3.25rem;
+}
+
+.site-footer {
+  position: fixed;
+  bottom: 0;
+  left: var(--sidebar-width);
+  right: 0;
+  padding: 0.6rem 1rem;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--muted);
+  background: rgba(13, 17, 23, 0.92);
+  backdrop-filter: blur(6px);
+  z-index: 15;
+}
+
+
+/* ==========================================================================
+   Shared components: cards, chips, link buttons
+   ========================================================================== */
+
+.card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
+}
+
+.card:hover {
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35), var(--glow);
+}
+
+.body {
+  padding: 1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.body h3 {
+  margin: 0 0 0.25rem;
+  font-size: 1.05rem;
+}
+
+.body p {
+  margin: 0.25rem 0 0.75rem;
+  color: var(--muted);
+  flex: 1;
+}
+
+/* screenshot / video slot, striped placeholder until media loads */
+.shot {
+  aspect-ratio: 16 / 9;
+  background: repeating-linear-gradient(45deg, var(--panel), var(--panel) 10px, var(--panel-hover) 10px, var(--panel-hover) 20px);
+}
+
+.shot img,
+.shot video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.chips li {
+  padding: 0.3rem 0.5rem;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  color: var(--fg);
+  font-size: 0.68rem;
+  white-space: nowrap;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.chips li:hover {
+  border-color: var(--accent);
+  box-shadow: var(--glow);
+}
+
+/* bordered pill with an icon: email/GitHub/LinkedIn row and "View on GitHub" */
+.link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--fg);
+  transition: box-shadow 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.link-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  text-decoration: none;
+  box-shadow: var(--glow);
+}
+
+.link-btn img {
+  flex: none;
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+
+/* ==========================================================================
+   About
+   ========================================================================== */
+
+.about-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: 22rem 1fr;
+  gap: 3rem;
+  align-items: center;
+  padding: 2.5rem;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
+}
+
+.about-grid:hover {
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.35), var(--glow);
+}
+
+/* faint green wash across the panel */
+.about-grid::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(63, 185, 80, 0.08), transparent 60%);
+  pointer-events: none;
+}
+
+.portrait {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  box-shadow: 0 0 0 6px rgba(63, 185, 80, 0.06);
+}
+
+.about-grid .text p {
+  margin: 1rem 0 0;
+  font-size: 1.05rem;
+}
+
+.contact-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: 1.75rem;
+}
+
+
+/* ==========================================================================
+   Projects
+   ========================================================================== */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+}
+
+.proj-card {
+  position: relative;
+  cursor: pointer;
+}
+
+.proj-card .body p {
+  margin-bottom: 0;
+}
+
+/* green spotlight from the top edge on hover */
+.proj-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle at 50% 0%, rgba(63, 185, 80, 0.25), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+
+.proj-card:hover::before {
+  opacity: 1;
+}
+
+.proj-card:hover {
+  border-color: var(--accent);
+}
+
+/* project detail popup (<dialog>) */
+.lightbox {
+  width: min(56rem, calc(100% - 4rem));
+  max-width: none;
+  max-height: 90vh;
+  padding: 0;
+  overflow: auto;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  color: var(--fg);
+}
+
+.lightbox::backdrop {
+  background: rgba(0, 0, 0, 0.75);
+}
+
+.lightbox-content {
+  padding: 3.5rem 2.5rem 2.5rem;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 2.25rem;
+  height: 2.25rem;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--muted);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.lightbox-close:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.lightbox-content .shot {
+  margin-bottom: 1.25rem;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.lightbox-content h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.4rem;
+}
+
+.lightbox-content p {
+  margin: 0 0 1rem;
+  color: var(--muted);
+}
+
+.lightbox-content .chips {
+  margin-bottom: 1.25rem;
+}
+
+.lightbox-content .chips li {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.9rem;
+}
+
+
+/* ==========================================================================
+   Hearth
+   ========================================================================== */
+
+.hearth-grid {
+  display: grid;
+  grid-template-columns: 1.7fr 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.hearth-video {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.hearth-video video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.hearth-text p {
+  margin: 1rem 0 0;
+  color: var(--muted);
+}
+
+.hearth-text .chips {
+  margin-top: 1rem;
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.8rem;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 0.85rem;
+}
+
+/* green "live" dot */
+.status::before {
+  content: "";
+  width: 0.5rem;
+  height: 0.5rem;
+  background: var(--accent);
+  border-radius: 50%;
+  box-shadow: 0 0 6px var(--accent);
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.feature-grid .card {
+  height: auto;
+}
+
+.feature-grid ul {
+  margin: 0.5rem 0 0;
+  padding-left: 1.2rem;
+  color: var(--muted);
+}
+
+
+/* ==========================================================================
+   Experience / education / skills
+   ========================================================================== */
+
+.triple {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.triple h2 {
+  margin-bottom: 1rem;
+}
+
+.triple .card {
+  margin-bottom: 1rem;
+}
+
+.triple .card h3,
+.feature-grid h3 {
+  color: var(--accent);
+}
+
+.skills-col {
+  margin-top: 2rem;
+}
+
+.skills-col .chips {
+  margin-bottom: 1rem;
+}
+
+.skills-col .chips:last-child {
+  margin-bottom: 0;
+}
+
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+/* narrower desktops: fewer columns */
+@media (max-width: 75rem) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 64rem) {
+  main {
+    padding: 2.5rem 2rem;
+  }
+
+  .about-grid {
+    grid-template-columns: 16rem 1fr;
+    gap: 2rem;
+    padding: 2rem;
+  }
+
+  .hearth-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 60rem) {
+  .triple {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* phones and small tablets: the side nav becomes a top bar and the page
+   scrolls normally instead of paging (app.js scrolls to sections on nav click) */
+@media (max-width: 48rem) {
+  .side-nav {
+    inset: 0 0 auto 0;
+    width: 100%;
+    padding: 0.75rem 0.5rem;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0.25rem;
+    background: rgba(13, 17, 23, 0.92);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+    overflow-x: auto;
+  }
+
+  .side-nav button {
+    padding: 0.4rem 0.7rem;
+    border-left: none;
+    border-bottom: 3px solid transparent;
+    border-radius: 6px 6px 0 0;
+    white-space: nowrap;
+  }
+
+  .side-nav button.active {
+    border-bottom-color: var(--accent);
+  }
+
+  main {
+    margin-left: 0;
+    min-height: 0;
+    padding: 5rem 1.25rem 3.5rem;
+    justify-content: flex-start;
+    gap: 3.5rem;
+  }
+
+  /* show every section at once */
+  section {
+    display: flex;
+  }
+
+  .page-btn {
+    display: none;
+  }
+
+  .site-footer {
+    left: 0;
+  }
+
+  h1 {
+    font-size: 1.9rem;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+
+  .portrait {
+    max-width: 12rem;
+    aspect-ratio: 1 / 1;
+    margin: 0 auto;
+  }
+
+  .contact-row {
+    gap: 0.75rem;
+  }
+
+  .contact-row .link-btn {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.85rem;
+  }
+
+  .lightbox {
+    width: calc(100% - 2rem);
+  }
+
+  .lightbox-content {
+    padding: 3rem 1.25rem 1.5rem;
+  }
+
+  .lightbox-content h3 {
+    font-size: 1.15rem;
+  }
+
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 40rem) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* narrow phones */
+@media (max-width: 26rem) {
+  main {
+    padding: 5.75rem 1rem 5.25rem;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+  }
+
+  .about-grid {
+    padding: 1.25rem;
+  }
+
+  .page-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+  }
+}

@@ -1,428 +1,233 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Euporea</title>
-<meta name="description" content="Projects and code by Sean Clarke.">
-<style>
-:root{--bg:#0d1117;--panel:#161b22;--line:#30363d;--fg:#e6edf3;--muted:#8b949e;--accent:#3fb950}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.65 ui-monospace,SFMono-Regular,Consolas,monospace}
-a{color:var(--accent);text-decoration:none}
-a:hover{text-decoration:underline}
-/* left-hand section menu, themed to match the rest of the page */
-.side-nav{position:fixed;top:0;left:0;bottom:0;width:11rem;padding:2rem 0;display:flex;flex-direction:column;justify-content:center;gap:1.25rem;background:none;border:none;z-index:20}
-.side-nav button{background:none;border:none;border-left:3px solid transparent;color:var(--muted);font:inherit;text-align:left;padding:.4rem 1.25rem;cursor:pointer;border-radius:0 6px 6px 0;transition:box-shadow .2s ease,color .2s ease}
-.side-nav button:hover{color:var(--fg);box-shadow:0 0 8px 2px rgba(63,185,80,.45)}
-.side-nav button.active{color:var(--accent);border-left-color:var(--accent);background:rgba(63,185,80,.1);border-radius:0 6px 6px 0}
-main{margin-left:11rem;min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:3rem 3.5rem}
-section{display:none;flex-direction:column;opacity:0;transition:opacity .4s ease}
-section.active{display:flex;opacity:1}
-section.fade-out{opacity:0}
-.content{max-width:82rem;width:100%;margin:0 auto}
-.page-btn{position:fixed;left:calc(11rem + (100% - 11rem)/2);transform:translateX(-50%);padding:.6rem 1.25rem;border-radius:999px;background:var(--panel);border:1px solid var(--line);color:var(--accent);font:inherit;font-size:.85rem;cursor:pointer;z-index:20;display:flex;align-items:center;gap:.5rem;opacity:1;transition:opacity .3s ease,background .2s ease,border-color .2s ease,box-shadow .2s ease}
-.page-btn:hover{background:#1c222b;border-color:var(--accent);box-shadow:0 0 8px 2px rgba(63,185,80,.45)}
-.page-btn:disabled{opacity:0;pointer-events:none}
-#prevBtn{top:1.25rem}
-#nextBtn{bottom:3.25rem}
-.site-footer{position:fixed;bottom:0;left:11rem;right:0;padding:.6rem 1rem;text-align:center;font-size:.8rem;color:var(--muted);background:rgba(13,17,23,.92);backdrop-filter:blur(6px);z-index:15}
-h1{margin:0;font-size:2.5rem}
-h1::before{content:"$ ";color:var(--accent)}
-h1::after{content:"";display:block;width:3.5rem;height:3px;background:var(--accent);border-radius:2px;margin-top:.6rem}
-.tag{color:var(--muted);margin:.5rem 0 0;font-size:1.1rem}
-.accent{color:var(--accent)}
-h2{font-size:1.1rem;margin:0 0 1.5rem;color:var(--muted);font-weight:400}
-h2::before{content:"## ";color:var(--accent)}
-h2::after{content:"";display:block;width:2.5rem;height:2px;background:var(--accent);border-radius:2px;margin-top:.5rem}
-
-/* about */
-.about-grid{display:grid;grid-template-columns:22rem 1fr;gap:3rem;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:2.5rem;position:relative;overflow:hidden;transition:transform .15s ease-out,box-shadow .15s ease-out}
-.about-grid:hover{box-shadow:0 16px 32px rgba(0,0,0,.35),0 0 8px 2px rgba(63,185,80,.45)}
-.about-grid::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(63,185,80,.08),transparent 60%);pointer-events:none}
-.about-grid .portrait{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:10px;border:1px solid var(--line);box-shadow:0 0 0 6px rgba(63,185,80,.06)}
-.about-grid .text p{margin:1rem 0 0;font-size:1.05rem}
-.contact-row{display:flex;gap:1.5rem;margin-top:1.75rem;flex-wrap:wrap}
-.contact-row a{display:flex;align-items:center;gap:.5rem;color:var(--fg);border:1px solid var(--line);border-radius:8px;padding:.5rem 1rem;background:rgba(255,255,255,.02)}
-.contact-row a:hover{border-color:var(--accent);color:var(--accent);text-decoration:none}
-.contact-row svg{width:1.1rem;height:1.1rem;fill:currentColor;flex:none}
-
-/* projects */
-.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem}
-@media(max-width:75rem){.grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:40rem){.grid{grid-template-columns:1fr}}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:8px;overflow:hidden;display:flex;flex-direction:column;height:100%}
-.shot{aspect-ratio:16/9;background:repeating-linear-gradient(45deg,var(--panel),var(--panel) 10px,#1c222b 10px,#1c222b 20px)}
-.shot img,.shot video{width:100%;height:100%;object-fit:cover;display:block}
-.body{padding:1rem 1.25rem;display:flex;flex-direction:column;flex:1}
-.body h3{margin:0 0 .25rem;font-size:1.05rem}
-.body p{margin:.25rem 0 .75rem;color:var(--muted);flex:1}
-p.tag{margin:.75rem 0 .35rem;font-size:.85rem}
-.chips{display:flex;gap:.4rem;flex-wrap:nowrap;padding:0;margin:auto 0 0;list-style:none;overflow:hidden}
-.chips li{background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:.3rem .5rem;color:var(--fg);font-size:.68rem;white-space:nowrap}
-
-/* experience / education / skills */
-.triple{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
-@media(max-width:60rem){.triple{grid-template-columns:1fr}}
-.triple h2{margin-bottom:1rem}
-.triple .card{margin-bottom:1rem}
-.exp-col{display:flex;flex-direction:column}
-.triple .card h3{color:var(--accent);font-weight:bold}
-.skills-col{margin-top:2rem}
-.skills-col p.tag:first-child{margin-top:0}
-.skills-col .chips li{transition:box-shadow .2s ease,border-color .2s ease}
-.skills-col .chips li:hover{border-color:var(--accent);box-shadow:0 0 8px 2px rgba(63,185,80,.45)}
-
-/* hearth tab */
-.hearth-grid{display:grid;grid-template-columns:1.7fr 1fr;gap:2rem;align-items:center}
-@media(max-width:64rem){.hearth-grid{grid-template-columns:1fr}}
-.hearth-video{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--panel)}
-.hearth-video video{display:block;width:100%;aspect-ratio:16/9;object-fit:cover}
-.hearth-text .chips li{transition:box-shadow .2s ease,border-color .2s ease}
-.hearth-text .chips li:hover{border-color:var(--accent);box-shadow:0 0 8px 2px rgba(63,185,80,.45)}
-.feature-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:2rem}
-@media(max-width:48rem){.feature-grid{grid-template-columns:1fr}}
-.feature-grid .card{height:auto}
-.feature-grid h3{color:var(--accent)}
-.feature-grid ul{color:var(--muted);padding-left:1.2rem;margin:.5rem 0 0}
-.status{display:inline-flex;align-items:center;gap:.5rem;border:1px solid var(--line);border-radius:999px;padding:.25rem .8rem;font-size:.85rem;background:var(--panel)}
-.status::before{content:"";width:.5rem;height:.5rem;border-radius:50%;background:var(--accent);box-shadow:0 0 6px var(--accent)}
-.hearth-text p{color:var(--muted);margin:1rem 0 0}
-
-/* project summary cards + lightbox */
-.proj-card{cursor:pointer;position:relative}
-.proj-card .body p{margin-bottom:0}
-.proj-card::before{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(circle at 50% 0%,rgba(63,185,80,.25),transparent 70%);opacity:0;transition:opacity .25s ease;pointer-events:none}
-.proj-card:hover::before{opacity:1}
-.proj-card:hover{border-color:var(--accent)}
-.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.75);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .25s ease;z-index:50;padding:2rem}
-.lightbox.open{opacity:1;pointer-events:auto}
-.lightbox-panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;max-width:56rem;width:100%;max-height:90vh;overflow:auto;padding:3.5rem 2.5rem 2.5rem;position:relative}
-.lightbox-close{position:absolute;top:1rem;right:1rem;width:2.25rem;height:2.25rem;border-radius:50%;background:var(--bg);border:1px solid var(--line);color:var(--muted);font-size:1.5rem;line-height:1;cursor:pointer}
-.lightbox-close:hover{color:var(--accent);border-color:var(--accent)}
-.lightbox-content .shot{border-radius:8px;margin-bottom:1.25rem;overflow:hidden}
-.lightbox-content h3{margin:0 0 .5rem;font-size:1.4rem}
-.lightbox-content p{color:var(--muted);margin:0 0 1rem}
-.lightbox-content .chips{margin:0 0 1.25rem;flex-wrap:wrap}
-.lightbox-content .chips li{font-size:.9rem;padding:.4rem .8rem;transition:box-shadow .2s ease,border-color .2s ease}
-.lightbox-content .chips li:hover{border-color:var(--accent);box-shadow:0 0 8px 2px rgba(63,185,80,.45)}
-.gh-link{display:inline-flex;align-items:center;gap:.5rem;color:var(--fg);border:1px solid var(--line);border-radius:8px;padding:.5rem 1rem;background:rgba(255,255,255,.02);transition:box-shadow .2s ease,border-color .2s ease,color .2s ease}
-.gh-link:hover{border-color:var(--accent);color:var(--accent);text-decoration:none;box-shadow:0 0 8px 2px rgba(63,185,80,.45)}
-.gh-link svg{width:1.1rem;height:1.1rem;fill:currentColor;flex:none}
-
-/* card tilt-on-hover, applied via JS (perspective transform follows the cursor) */
-.card{transition:transform .15s ease-out,box-shadow .15s ease-out}
-.card:hover{box-shadow:0 12px 24px rgba(0,0,0,.35),0 0 8px 2px rgba(63,185,80,.45)}
-
-/* tablet: sidebar stays, just tighten the margins it competes with */
-@media(max-width:64rem){
-  main{padding:2.5rem 2rem}
-  .about-grid{grid-template-columns:16rem 1fr;gap:2rem;padding:2rem}
-}
-
-/* mobile/small tablet: side-nav becomes a top bar, content goes full width */
-@media(max-width:48rem){
-  .side-nav{position:fixed;top:0;left:0;right:0;bottom:auto;width:100%;height:auto;flex-direction:row;justify-content:center;align-items:center;gap:.25rem;padding:.75rem .5rem;background:rgba(13,17,23,.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);overflow-x:auto}
-  .side-nav button{padding:.4rem .7rem;white-space:nowrap;border-left:none;border-bottom:3px solid transparent;border-radius:6px 6px 0 0}
-  .side-nav button.active{border-left:none;border-bottom-color:var(--accent);border-radius:6px 6px 0 0}
-  /* paging doesn't work well on touch screens: drop the prev/next buttons and let the page scroll instead */
-  main{margin-left:0;min-height:0;justify-content:flex-start;padding:1.5rem 1.25rem;padding-top:5rem;padding-bottom:3.5rem;gap:3.5rem}
-  .site-footer{left:0}
-  .page-btn{display:none}
-  section,section.active,section.fade-out{display:flex;opacity:1}
-  h1{font-size:1.9rem}
-  .about-grid{grid-template-columns:1fr;gap:1.5rem;padding:1.5rem;text-align:left}
-  .about-grid .portrait{max-width:12rem;aspect-ratio:1/1;margin:0 auto}
-  .contact-row{gap:.75rem}
-  .contact-row a{padding:.4rem .75rem;font-size:.85rem}
-  .lightbox{padding:1rem}
-  .lightbox-panel{padding:3rem 1.25rem 1.5rem}
-  .lightbox-content h3{font-size:1.15rem}
-}
-
-/* narrow phones: shrink further so nothing overflows */
-@media(max-width:26rem){
-  main{padding:1.25rem 1rem;padding-top:5.75rem;padding-bottom:5.25rem}
-  h1{font-size:1.6rem}
-  .about-grid{padding:1.25rem}
-  .page-btn{padding:.5rem 1rem;font-size:.8rem}
-}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Euporea</title>
+  <meta name="description" content="Projects and code by Sean Clarke.">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<nav class="side-nav">
-  <button data-target="about">aboutMe</button>
-  <button data-target="projects">myProjects</button>
-  <button data-target="hearth">Hearth</button>
-  <button data-target="skills">myExperience</button>
-</nav>
-<button id="prevBtn" class="page-btn" aria-label="Previous section">&#9650; Previous</button>
-<button id="nextBtn" class="page-btn" aria-label="Next section">&#9660; Next</button>
-<main>
 
-<section id="about">
-<div class="content">
-  <div class="about-grid">
-    <img class="portrait" src="img/sean.png" alt="Sean Clarke">
-    <div class="text">
-      <h1>Euporea</h1>
-      <p class="tag">Building tools, bots and self-hosted things.</p>
-      <p>Hi! My name is <strong class="accent">Sean Clarke</strong>, and I am a <strong class="accent">Computer Programming (CPRO)</strong> graduate from Lambton College (3.8 GPA, Dean's List, CIBC Business Award for Academic Excellence). I am a huge gamer with a passion for game development and UI/UX design who is familiar with <strong class="accent">C#, Python, Java, and SQL/NoSQL</strong>. When I am not playing games, I'm planning &amp; developing various tools and programs to solve issues, or increase QOL. After 15+ years of working in customer service/retail as both management and human resources, I bring my previous leadership skills, adaptability, and positive attitude into the tech industry.</p>
-      <div class="contact-row">
-        <a href="mailto:sean.clarke.dev@gmail.com"><svg viewBox="0 0 24 24"><path d="M2 4h20v16H2V4zm2 2v.01L12 13l8-6.99V6H4zm16 2.24-7.4 6.47a1 1 0 0 1-1.2 0L4 8.24V18h16V8.24z"/></svg>sean.clarke.dev@gmail.com</a>
-        <a href="https://github.com/Euporea"><svg viewBox="0 0 24 24"><path d="M12 .5C5.73.5.98 5.24.98 11.52c0 5.02 3.26 9.28 7.78 10.78.57.1.78-.25.78-.55v-1.94c-3.17.69-3.83-1.53-3.83-1.53-.52-1.31-1.26-1.66-1.26-1.66-1.03-.7.08-.69.08-.69 1.14.08 1.74 1.17 1.74 1.17 1.01 1.74 2.65 1.24 3.3.95.1-.73.4-1.24.72-1.53-2.53-.29-5.19-1.27-5.19-5.64 0-1.25.44-2.27 1.17-3.06-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.15 1.17a10.9 10.9 0 0 1 2.87-.39c.97 0 1.95.13 2.87.39 2.19-1.48 3.15-1.17 3.15-1.17.62 1.58.23 2.75.11 3.04.73.79 1.17 1.81 1.17 3.06 0 4.38-2.66 5.34-5.2 5.63.41.36.77 1.06.77 2.14v3.17c0 .3.21.66.79.55A11.03 11.03 0 0 0 23 11.52C23 5.24 18.27.5 12 .5z"/></svg>github.com/Euporea</a>
-        <a href="https://www.linkedin.com/in/sean-clarke-389188309/"><svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.64-1.85 3.38-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.11 20.45H3.56V9h3.55v11.45z"/></svg>LinkedIn</a>
+  <nav class="side-nav">
+    <button>aboutMe</button>
+    <button>myProjects</button>
+    <button>Hearth</button>
+    <button>myExperience</button>
+  </nav>
+
+  <button id="prevBtn" class="page-btn" aria-label="Previous section">&#9650; Previous</button>
+  <button id="nextBtn" class="page-btn" aria-label="Next section">&#9660; Next</button>
+
+  <main>
+
+    <!-- About -->
+    <section id="about">
+      <div class="content">
+        <div class="about-grid">
+          <img class="portrait" src="img/sean.png" alt="Sean Clarke">
+          <div class="text">
+            <h1>Euporea</h1>
+            <p class="tag">Building tools, bots and self-hosted things.</p>
+            <p>
+              Hi! My name is <strong class="accent">Sean Clarke</strong>, and I am a
+              <strong class="accent">Computer Programming (CPRO)</strong> graduate from Lambton College
+              (3.8 GPA, Dean's List, CIBC Business Award for Academic Excellence). I am a huge gamer with a
+              passion for game development and UI/UX design who is familiar with
+              <strong class="accent">C#, Python, Java, and SQL/NoSQL</strong>. When I am not playing games,
+              I'm planning &amp; developing various tools and programs to solve issues, or increase QOL.
+              After 15+ years of working in customer service/retail as both management and human resources,
+              I bring my previous leadership skills, adaptability, and positive attitude into the tech industry.
+            </p>
+            <div class="contact-row">
+              <a class="link-btn" href="mailto:sean.clarke.dev@gmail.com">
+                <img src="img/mail.svg" alt="">sean.clarke.dev@gmail.com
+              </a>
+              <a class="link-btn" href="https://github.com/Euporea">
+                <img src="img/github.svg" alt="">github.com/Euporea
+              </a>
+              <a class="link-btn" href="https://www.linkedin.com/in/sean-clarke-389188309/">
+                <img src="img/linkedin.svg" alt="">LinkedIn
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</div>
-</section>
+    </section>
 
-<section id="projects">
-<div class="content">
-<h2>myProjects</h2>
-<p class="tag" style="margin:-1rem 0 1.5rem">Click each card for more information.</p>
-<div class="grid">
+    <!-- Projects
+         Each card shows a title and blurb. Its <template> holds the extra detail
+         (screenshot, chips, link) that app.js shows in the popup. -->
+    <section id="projects">
+      <div class="content">
+        <h2>myProjects</h2>
+        <p class="hint">Click each card for more information.</p>
 
-<article class="card proj-card" data-target="tpl-disrecorder">
-  <div class="body">
-    <h3>DisRecorder</h3>
-    <p>Live transcription of D&amp;D Discord voice sessions into Obsidian-ready Markdown logs.</p>
-  </div>
-</article>
+        <div class="grid">
 
-<article class="card proj-card" data-target="tpl-steamtracker">
-  <div class="body">
-    <h3>SteamTracker</h3>
-    <p>Windows desktop app for tracking your Steam library, playtime, and achievements.</p>
-  </div>
-</article>
+          <article class="card proj-card">
+            <div class="body">
+              <h3>DisRecorder</h3>
+              <p>Live transcription of D&amp;D Discord voice sessions into Obsidian-ready Markdown logs.</p>
+            </div>
+            <template>
+              <div class="shot"><img src="img/disrecorder.png" alt="DisRecorder screenshot"></div>
+              <ul class="chips"><li>Python</li><li>Discord</li><li>Speech-to-text</li></ul>
+              <a class="link-btn" href="https://github.com/Euporea/DisRecorder" target="_blank" rel="noopener">
+                <img src="img/github.svg" alt="">View on GitHub
+              </a>
+            </template>
+          </article>
 
-<article class="card proj-card" data-target="tpl-wreckoning">
-  <div class="body">
-    <h3>Wreckoning Day</h3>
-    <p>A vehicular-demolition game where you clear a safe path for an unstoppable hauler using a fleet of specialised machines.</p>
-  </div>
-</article>
+          <article class="card proj-card">
+            <div class="body">
+              <h3>SteamTracker</h3>
+              <p>Windows desktop app for tracking your Steam library, playtime, and achievements.</p>
+            </div>
+            <template>
+              <div class="shot"><video src="img/steamtracker.mp4" style="object-position:top" autoplay loop muted playsinline></video></div>
+              <ul class="chips"><li>Python</li><li>PySide6</li><li>Steam API</li></ul>
+              <a class="link-btn" href="https://github.com/Euporea/SteamTracker" target="_blank" rel="noopener">
+                <img src="img/github.svg" alt="">View on GitHub
+              </a>
+            </template>
+          </article>
 
-<article class="card proj-card" data-target="tpl-humanity">
-  <div class="body">
-    <h3>Humanity Index</h3>
-    <p>A cyberpunk psychological-horror first-person shooter where your grip on your own humanity is a core mechanic.</p>
-  </div>
-</article>
+          <article class="card proj-card">
+            <div class="body">
+              <h3>Wreckoning Day</h3>
+              <p>A vehicular-demolition game where you clear a safe path for an unstoppable hauler using a fleet of specialised machines.</p>
+            </div>
+            <template>
+              <div class="shot"><video src="img/wreckoning-day.mp4" autoplay loop muted playsinline></video></div>
+              <p>Built in C# on Godot with Jolt physics and a deterministic two-layer destruction system.</p>
+              <ul class="chips"><li>Godot 4</li><li>C#</li><li>3D physics</li></ul>
+            </template>
+          </article>
 
-</div>
-</div>
-</section>
+          <article class="card proj-card">
+            <div class="body">
+              <h3>Humanity Index</h3>
+              <p>A cyberpunk psychological-horror first-person shooter where your grip on your own humanity is a core mechanic.</p>
+            </div>
+            <template>
+              <div class="shot"><video src="img/humanity-index.mp4" autoplay loop muted playsinline></video></div>
+              <ul class="chips"><li>Godot 4</li><li>GDScript</li><li>FPS</li></ul>
+            </template>
+          </article>
 
-<template id="tpl-disrecorder">
-  <div class="shot"><img src="img/disrecorder.png" alt="DisRecorder screenshot"></div>
-  <h3>DisRecorder</h3>
-  <p>Live transcription of D&amp;D Discord voice sessions into Obsidian-ready Markdown logs.</p>
-  <ul class="chips" style="flex-wrap:wrap"><li>Python</li><li>Discord</li><li>Speech-to-text</li></ul>
-  <a class="gh-link" href="https://github.com/Euporea/DisRecorder" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 .5C5.73.5.98 5.24.98 11.52c0 5.02 3.26 9.28 7.78 10.78.57.1.78-.25.78-.55v-1.94c-3.17.69-3.83-1.53-3.83-1.53-.52-1.31-1.26-1.66-1.26-1.66-1.03-.7.08-.69.08-.69 1.14.08 1.74 1.17 1.74 1.17 1.01 1.74 2.65 1.24 3.3.95.1-.73.4-1.24.72-1.53-2.53-.29-5.19-1.27-5.19-5.64 0-1.25.44-2.27 1.17-3.06-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.15 1.17a10.9 10.9 0 0 1 2.87-.39c.97 0 1.95.13 2.87.39 2.19-1.48 3.15-1.17 3.15-1.17.62 1.58.23 2.75.11 3.04.73.79 1.17 1.81 1.17 3.06 0 4.38-2.66 5.34-5.2 5.63.41.36.77 1.06.77 2.14v3.17c0 .3.21.66.79.55A11.03 11.03 0 0 0 23 11.52C23 5.24 18.27.5 12 .5z"/></svg>View on GitHub</a>
-</template>
-<template id="tpl-steamtracker">
-  <div class="shot"><video src="img/steamtracker.mp4" style="object-position:top" autoplay loop muted playsinline></video></div>
-  <h3>SteamTracker</h3>
-  <p>Windows desktop app for tracking your Steam library, playtime, and achievements.</p>
-  <ul class="chips" style="flex-wrap:wrap"><li>Python</li><li>PySide6</li><li>Steam API</li></ul>
-  <a class="gh-link" href="https://github.com/Euporea/SteamTracker" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 .5C5.73.5.98 5.24.98 11.52c0 5.02 3.26 9.28 7.78 10.78.57.1.78-.25.78-.55v-1.94c-3.17.69-3.83-1.53-3.83-1.53-.52-1.31-1.26-1.66-1.26-1.66-1.03-.7.08-.69.08-.69 1.14.08 1.74 1.17 1.74 1.17 1.01 1.74 2.65 1.24 3.3.95.1-.73.4-1.24.72-1.53-2.53-.29-5.19-1.27-5.19-5.64 0-1.25.44-2.27 1.17-3.06-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.15 1.17a10.9 10.9 0 0 1 2.87-.39c.97 0 1.95.13 2.87.39 2.19-1.48 3.15-1.17 3.15-1.17.62 1.58.23 2.75.11 3.04.73.79 1.17 1.81 1.17 3.06 0 4.38-2.66 5.34-5.2 5.63.41.36.77 1.06.77 2.14v3.17c0 .3.21.66.79.55A11.03 11.03 0 0 0 23 11.52C23 5.24 18.27.5 12 .5z"/></svg>View on GitHub</a>
-</template>
-<template id="tpl-wreckoning">
-  <div class="shot"><video src="img/wreckoning-day.mp4" autoplay loop muted playsinline></video></div>
-  <h3>Wreckoning Day</h3>
-  <p>A vehicular-demolition game where you clear a safe path for an unstoppable hauler using a fleet of specialised machines. Built in C# on Godot with Jolt physics and a deterministic two-layer destruction system.</p>
-  <ul class="chips" style="flex-wrap:wrap"><li>Godot 4</li><li>C#</li><li>3D physics</li></ul>
-</template>
-<template id="tpl-humanity">
-  <div class="shot"><video src="img/humanity-index.mp4" autoplay loop muted playsinline></video></div>
-  <h3>Humanity Index</h3>
-  <p>A cyberpunk psychological-horror first-person shooter where your grip on your own humanity is a core mechanic.</p>
-  <ul class="chips" style="flex-wrap:wrap"><li>Godot 4</li><li>GDScript</li><li>FPS</li></ul>
-</template>
+        </div>
+      </div>
+    </section>
 
-<section id="hearth">
-<div class="content">
-<h2>Hearth - Home Server Management</h2>
-<div class="hearth-grid">
-  <div class="hearth-video">
-    <video src="img/hearth.mp4" autoplay loop muted playsinline></video>
-  </div>
-  <div class="hearth-text">
-    <span class="status">Actively in development</span>
-    <p>Hearth is a control panel for my self-hosted home server. One web app to start and stop game servers, run a media library, and use local AI tools for chat, voice, and image generation. The heavy GPU services spin up on demand and shut themselves down when idle thanks to everything being containerized with Docker.</p>
-    <ul class="chips" style="flex-wrap:wrap;margin:1rem 0 0"><li>Python</li><li>FastAPI</li><li>Docker</li><li>Discord bot</li></ul>
-  </div>
-</div>
-<div class="feature-grid">
-  <div class="card"><div class="body">
-    <h3>Recently completed</h3>
-    <ul>
-      <li>Containerized the whole stack with Docker</li>
-      <li>Added game server hosting to the stack</li>
-      <li>Added a Discord bot so anyone with permission can manage servers from their Discord client</li>
-    </ul>
-  </div></div>
-  <div class="card"><div class="body">
-    <h3>Currently planned</h3>
-    <ul>
-      <li>3D character chatbot "FaceTime" style back-and-forth conversation.</li>
-    </ul>
-  </div></div>
-</div>
-</div>
-</section>
+    <!-- Hearth -->
+    <section id="hearth">
+      <div class="content">
+        <h2>Hearth - Home Server Management</h2>
 
-<section id="skills">
-<div class="content">
-<div class="triple">
-  <div class="exp-col">
-    <h2>myExperience</h2>
-    <div class="card"><div class="body">
-      <h3>Student Developer Co-op, Lambton College</h3>
-      <p class="tag">May 2026 &ndash; Sep 2026</p>
-      <ul>
-        <li>Developed eLearning course modules with Articulate Storyline and Rise 360.</li>
-        <li>Built Excel workbooks with advanced VBA macros to automate workflows and support course development.</li>
-        <li>Delivered critical milestones with the team using established project management practices.</li>
-      </ul>
-    </div></div>
-    <div class="card" style="margin-top:.5rem"><div class="body">
-      <h3>Support Manager / Personnel Manager / Department Manager, Wal-Mart Canada</h3>
-      <p class="tag">2011 &ndash; Aug 2024</p>
-      <ul>
-        <li>HR representative for a store of up to 450 employees: hiring, interviews, onboarding and policy compliance.</li>
-        <li>Supervised, trained and mentored staff; managed inventory and daily store operations.</li>
-      </ul>
-    </div></div>
-  </div>
-  <div>
-    <h2>myEducation</h2>
-    <div class="card"><div class="body">
-      <h3>Computer Programming, Advanced Diploma</h3>
-      <p class="tag">Lambton College &middot; Graduated July 2026</p>
-      <ul>
-        <li>3.8 GPA, Dean's List recipient</li>
-        <li>CIBC Business Award for Academic Excellence</li>
-        <li>Coursework: software design, databases, web development, data structures</li>
-      </ul>
-    </div></div>
-    <div class="skills-col">
-      <h2>mySkills</h2>
-      <p class="tag">Languages</p>
-      <ul class="chips" style="flex-wrap:wrap;margin:0 0 1rem"><li>Python</li><li>C#</li><li>Java</li><li>JavaScript</li><li>SQL</li></ul>
-      <p class="tag">Web</p>
-      <ul class="chips" style="flex-wrap:wrap;margin:0 0 1rem"><li>HTML</li><li>CSS</li><li>React</li><li>Node.js</li><li>Bootstrap</li></ul>
-      <p class="tag">Databases</p>
-      <ul class="chips" style="flex-wrap:wrap;margin:0 0 1rem"><li>Oracle SQL</li><li>MongoDB</li><li>NoSQL</li></ul>
-      <p class="tag">Tools</p>
-      <ul class="chips" style="flex-wrap:wrap;margin:0"><li>Git/GitHub</li><li>Docker</li><li>AWS</li><li>Visual Studio / VS Code</li><li>Articulate Storyline</li><li>Photoshop</li></ul>
-    </div>
-  </div>
-</div>
-</div>
-</section>
+        <div class="hearth-grid">
+          <div class="hearth-video">
+            <video src="img/hearth.mp4" autoplay loop muted playsinline></video>
+          </div>
+          <div class="hearth-text">
+            <span class="status">Actively in development</span>
+            <p>
+              Hearth is a control panel for my self-hosted home server. One web app to start and stop game
+              servers, run a media library, and use local AI tools for chat, voice, and image generation.
+              The heavy GPU services spin up on demand and shut themselves down when idle thanks to
+              everything being containerized with Docker.
+            </p>
+            <ul class="chips"><li>Python</li><li>FastAPI</li><li>Docker</li><li>Discord bot</li></ul>
+          </div>
+        </div>
 
-</main>
-<footer class="site-footer">&copy; <span id="year">2026</span> Sean Clarke. All rights reserved.</footer>
-<div id="lightbox" class="lightbox" aria-hidden="true">
-  <div class="lightbox-panel">
+        <div class="feature-grid">
+          <div class="card"><div class="body">
+            <h3>Recently completed</h3>
+            <ul>
+              <li>Containerized the whole stack with Docker</li>
+              <li>Added game server hosting to the stack</li>
+              <li>Added a Discord bot so anyone with permission can manage servers from their Discord client</li>
+            </ul>
+          </div></div>
+          <div class="card"><div class="body">
+            <h3>Currently planned</h3>
+            <ul>
+              <li>3D character chatbot "FaceTime" style back-and-forth conversation.</li>
+            </ul>
+          </div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience, education, skills -->
+    <section id="skills">
+      <div class="content">
+        <div class="triple">
+
+          <div>
+            <h2>myExperience</h2>
+            <div class="card"><div class="body">
+              <h3>Student Developer Co-op, Lambton College</h3>
+              <p class="meta">May 2026 &ndash; Sep 2026</p>
+              <ul>
+                <li>Developed eLearning course modules with Articulate Storyline and Rise 360.</li>
+                <li>Built Excel workbooks with advanced VBA macros to automate workflows and support course development.</li>
+                <li>Delivered critical milestones with the team using established project management practices.</li>
+              </ul>
+            </div></div>
+            <div class="card"><div class="body">
+              <h3>Support Manager / Personnel Manager / Department Manager, Wal-Mart Canada</h3>
+              <p class="meta">2011 &ndash; Aug 2024</p>
+              <ul>
+                <li>HR representative for a store of up to 450 employees: hiring, interviews, onboarding and policy compliance.</li>
+                <li>Supervised, trained and mentored staff; managed inventory and daily store operations.</li>
+              </ul>
+            </div></div>
+          </div>
+
+          <div>
+            <h2>myEducation</h2>
+            <div class="card"><div class="body">
+              <h3>Computer Programming, Advanced Diploma</h3>
+              <p class="meta">Lambton College &middot; Graduated July 2026</p>
+              <ul>
+                <li>3.8 GPA, Dean's List recipient</li>
+                <li>CIBC Business Award for Academic Excellence</li>
+                <li>Coursework: software design, databases, web development, data structures</li>
+              </ul>
+            </div></div>
+
+            <div class="skills-col">
+              <h2>mySkills</h2>
+              <p class="meta">Languages</p>
+              <ul class="chips"><li>Python</li><li>C#</li><li>Java</li><li>JavaScript</li><li>SQL</li></ul>
+              <p class="meta">Web</p>
+              <ul class="chips"><li>HTML</li><li>CSS</li><li>React</li><li>Node.js</li><li>Bootstrap</li></ul>
+              <p class="meta">Databases</p>
+              <ul class="chips"><li>Oracle SQL</li><li>MongoDB</li><li>NoSQL</li></ul>
+              <p class="meta">Tools</p>
+              <ul class="chips"><li>Git/GitHub</li><li>Docker</li><li>AWS</li><li>Visual Studio / VS Code</li><li>Articulate Storyline</li><li>Photoshop</li></ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">&copy; <span id="year"></span> Sean Clarke. All rights reserved.</footer>
+
+  <!-- Project popup, filled in by app.js -->
+  <dialog id="lightbox" class="lightbox">
     <button class="lightbox-close" aria-label="Close">&times;</button>
     <div class="lightbox-content"></div>
-  </div>
-</div>
-<script>
-var sections=Array.prototype.slice.call(document.querySelectorAll('main section'));
-var navBtns=Array.prototype.slice.call(document.querySelectorAll('.side-nav button'));
-var prevBtn=document.getElementById('prevBtn'), nextBtn=document.getElementById('nextBtn');
-var current=0, animating=false;
+  </dialog>
 
-function show(i){
-  var incoming=sections[i];
-  incoming.classList.add('fade-out');
-  sections.forEach(function(s,idx){ s.classList.toggle('active', idx===i); });
-  navBtns.forEach(function(b,idx){ b.classList.toggle('active', idx===i); });
-  prevBtn.disabled=(i===0);
-  nextBtn.disabled=(i===sections.length-1);
-  window.scrollTo({top:0,behavior:'instant'});
-  requestAnimationFrame(function(){ requestAnimationFrame(function(){ incoming.classList.remove('fade-out'); }); });
-}
+  <script src="app.js"></script>
 
-function go(i){
-  i=Math.max(0,Math.min(sections.length-1,i));
-  if(i===current||animating) return;
-  animating=true;
-  var old=sections[current];
-  old.classList.add('fade-out');
-  current=i;
-  setTimeout(function(){ show(i); animating=false; },400);
-}
-
-prevBtn.addEventListener('click',function(){ go(current-1); });
-nextBtn.addEventListener('click',function(){ go(current+1); });
-
-// below 48rem, CSS makes all sections visible and the page scrolls normally —
-// so nav clicks there just scroll to the section instead of paging through it
-document.getElementById('year').textContent=new Date().getFullYear();
-function isMobile(){ return window.matchMedia('(max-width:48rem)').matches; }
-navBtns.forEach(function(b,idx){
-  b.addEventListener('click',function(){
-    if(isMobile()) sections[idx].scrollIntoView({behavior:'smooth'});
-    else go(idx);
-  });
-});
-
-show(0);
-
-// mobile scroll tracking: highlight whichever section is centered in the viewport as the user scrolls
-var scrollObserver=new IntersectionObserver(function(entries){
-  if(!isMobile()) return;
-  entries.forEach(function(entry){
-    if(entry.isIntersecting) navBtns.forEach(function(b,idx){ b.classList.toggle('active', sections[idx]===entry.target); });
-  });
-},{rootMargin:'-45% 0px -45% 0px'});
-sections.forEach(function(s){ scrollObserver.observe(s); });
-
-// card tilt-on-hover: rotate toward the cursor, like tilting a physical card
-function attachTilt(el,strength){
-  strength=strength||10;
-  el.addEventListener('mousemove',function(e){
-    var r=el.getBoundingClientRect();
-    var x=(e.clientX-r.left)/r.width-0.5;
-    var y=(e.clientY-r.top)/r.height-0.5;
-    el.style.transform='perspective(700px) rotateX('+(-y*strength)+'deg) rotateY('+(x*strength)+'deg) translateY(-3px)';
-  });
-  el.addEventListener('mouseleave',function(){ el.style.transform=''; });
-}
-document.querySelectorAll('.card').forEach(function(el){ attachTilt(el); });
-attachTilt(document.querySelector('.about-grid'),3);
-
-// project lightbox: click a summary card to open its <template> content in a modal
-var lightbox=document.getElementById('lightbox');
-var lbContent=lightbox.querySelector('.lightbox-content');
-function openLightbox(tplId){
-  var tpl=document.getElementById(tplId);
-  if(!tpl) return;
-  lbContent.innerHTML='';
-  lbContent.appendChild(tpl.content.cloneNode(true));
-  lightbox.classList.add('open');
-  lightbox.setAttribute('aria-hidden','false');
-  var v=lbContent.querySelector('video');
-  if(v) v.play();
-}
-function closeLightbox(){
-  lightbox.classList.remove('open');
-  lightbox.setAttribute('aria-hidden','true');
-}
-document.querySelectorAll('.proj-card').forEach(function(c){
-  c.addEventListener('click',function(){ openLightbox(c.dataset.target); });
-});
-lightbox.querySelector('.lightbox-close').addEventListener('click',closeLightbox);
-lightbox.addEventListener('click',function(e){ if(e.target===lightbox) closeLightbox(); });
-document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeLightbox(); });
-</script>
-<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "5fe3a69a4a2d48fd8ffd1a5743b8b7fc"}'></script><!-- End Cloudflare Web Analytics -->
+  <!-- Cloudflare Web Analytics -->
+  <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "5fe3a69a4a2d48fd8ffd1a5743b8b7fc"}'></script>
 </body>
 </html>
