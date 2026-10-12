@@ -505,7 +505,8 @@ section.active {
   overflow: hidden;
 }
 
-.hearth-video video {
+.hearth-video video,
+.hearth-video img {
   display: block;
   width: 100%;
   aspect-ratio: 16 / 9;
@@ -557,6 +558,51 @@ section.active {
   margin: 0.5rem 0 0;
   padding-left: 1.2rem;
   color: var(--muted);
+}
+
+
+/* ==========================================================================
+   Nobody Online (reuses the Hearth layout above)
+   ========================================================================== */
+
+/* "Inspired by" / "Built with" labels sit tight above their chips */
+.hearth-text p.meta {
+  margin: 1.25rem 0 0.4rem;
+}
+
+.hearth-text p.meta + .chips {
+  margin-top: 0;
+}
+
+.game-cards {
+  margin-top: 2rem;
+}
+
+.game-cards h3 {
+  color: var(--accent);
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.gallery img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.gallery a:hover img,
+.gallery a:focus-visible img {
+  border-color: var(--accent);
+  box-shadow: var(--glow);
 }
 
 
@@ -719,6 +765,10 @@ section.active {
 
   .feature-grid {
     grid-template-columns: 1fr;
+  }
+
+  .gallery {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 

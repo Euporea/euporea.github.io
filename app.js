@@ -105,6 +105,21 @@ document.querySelectorAll('.proj-card').forEach((card) => {
   card.addEventListener('click', () => openLightbox(card));
 });
 
+// Nobody Online gallery: plain links to the full image, shown in the same popup when JS runs.
+document.querySelectorAll('.gallery a').forEach((link) => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+    const shot = document.createElement('div');
+    shot.className = 'shot';
+    const img = link.querySelector('img');
+    const caption = document.createElement('p');
+    caption.textContent = img.alt;
+    shot.append(img.cloneNode());
+    lightboxContent.replaceChildren(shot, caption);
+    lightbox.showModal();
+  });
+});
+
 lightbox.querySelector('.lightbox-close').addEventListener('click', () => lightbox.close());
 // the <dialog> has no padding, so a click whose target is the dialog itself hit the backdrop
 lightbox.addEventListener('click', (e) => {
