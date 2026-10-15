@@ -562,8 +562,41 @@ section.active {
 
 
 /* ==========================================================================
-   Nobody Online (reuses the Hearth layout above)
+   Nobody Online page, /nobody-online/ (reuses the Hearth layout above)
    ========================================================================== */
+
+/* standalone page: no side nav, so no sidebar gutter and the page just scrolls */
+.standalone main {
+  margin-left: 0;
+  padding-top: 2rem;
+  padding-bottom: 4rem;
+}
+
+.standalone .site-footer {
+  left: 0;
+}
+
+.standalone h2 {
+  margin-top: 3rem;
+}
+
+/* Recent Changes / Upcoming Features: the column headings already space it out */
+.standalone .feature-grid {
+  margin-top: 0;
+}
+
+/* "In progress" / "Coming soon" / "On the horizon" stacked in one card */
+.feature-grid ul + h3 {
+  margin-top: 1.5rem;
+}
+
+.back-link {
+  margin-bottom: 2rem;
+}
+
+.hearth-text h1 {
+  margin-top: 1rem;
+}
 
 /* "Inspired by" / "Built with" labels sit tight above their chips */
 .hearth-text p.meta {
@@ -574,11 +607,7 @@ section.active {
   margin-top: 0;
 }
 
-.game-cards {
-  margin-top: 2rem;
-}
-
-.game-cards h3 {
+.standalone .grid h3 {
   color: var(--accent);
 }
 
@@ -586,7 +615,6 @@ section.active {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   gap: 0.75rem;
-  margin-top: 1.5rem;
 }
 
 .gallery img {
@@ -603,6 +631,76 @@ section.active {
 .gallery a:focus-visible img {
   border-color: var(--accent);
   box-shadow: var(--glow);
+}
+
+
+.discord-card {
+  height: auto;
+}
+
+.discord-card .body {
+  flex-direction: row;
+  align-items: center;
+  gap: 2rem;
+}
+
+.discord-text {
+  flex: 1;
+}
+
+.discord-text h3 {
+  color: var(--accent);
+}
+
+.discord-text p {
+  margin-bottom: 0;
+}
+
+.discord-live {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.discord-members {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* overlapping avatar stack with a status dot */
+.discord-members li {
+  position: relative;
+  margin-left: -0.5rem;
+}
+
+.discord-members img {
+  display: block;
+  width: 2rem;
+  height: 2rem;
+  border: 2px solid var(--panel);
+  border-radius: 50%;
+}
+
+.discord-members li::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 0.55rem;
+  height: 0.55rem;
+  border: 2px solid var(--panel);
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.discord-members li.idle::after {
+  background: #d29922;
+}
+
+.discord-members li.dnd::after {
+  background: #f85149;
 }
 
 
@@ -769,6 +867,12 @@ section.active {
 
   .gallery {
     grid-template-columns: repeat(3, 1fr);
+  }
+
+  .discord-card .body {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
   }
 }
 

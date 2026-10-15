@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Nobody Online - An Idle MMO</title>
+  <meta name="description" content="Nobody's online. Half a million bots are. An idle / incremental clicker RPG wrapped around a full simulated MMORPG.">
+  <link rel="canonical" href="https://euporea.ca/nobody-online/">
+  <!-- link previews on Discord, Reddit, etc. -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://euporea.ca/nobody-online/">
+  <meta property="og:title" content="Nobody Online - An Idle MMO">
+  <meta property="og:description" content="Nobody's online. Half a million bots are. An idle / incremental clicker RPG wrapped around a full simulated MMORPG.">
+  <meta property="og:image" content="https://euporea.ca/img/nobody-online/01-main-menu.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body class="standalone">
+
+  <main>
+    <div class="content">
+
+      <a class="link-btn back-link" href="../">&larr; euporea.ca</a>
+
+      <div class="hearth-grid">
+        <div class="hearth-video">
+          <video src="../img/nobody-online.mp4" autoplay loop muted playsinline></video>
+        </div>
+        <div class="hearth-text">
+          <span class="status">Closed alpha</span>
+          <h1>Nobody Online</h1>
+          <p class="tag">Nobody's online. Half a million bots are.</p>
+          <p>
+            Nobody Online is an idle / incremental clicker RPG with auto-battled dungeons &amp; raids, wrapped around a full
+            MMORPG. Click to chop, mine and fish, automate the grind, craft new gear, then join a party and delve into
+            auto-battle dungeons and raids. Around you, 500,000 simulated players chat, trade, party up, ninja your
+            loot and climb the leaderboards.
+          </p>
+          <p class="meta">Inspired by</p>
+          <ul class="chips"><li>World of Warcraft</li><li>RuneScape</li><li>EverQuest</li><li>Final Fantasy XIV</li></ul>
+          <p class="meta">Built with</p>
+          <ul class="chips"><li>Godot 4</li><li>C#</li><li>Pixel art</li><li>PC / Steam</li></ul>
+        </div>
+      </div>
+
+      <h2>Features</h2>
+      <div class="grid">
+        <div class="card"><div class="body">
+          <h3>Incremental clicker</h3>
+          <p>Every click chips away at a tree, rock or fishing spot. Craft gear from what you gather and level skills all the way to 99.</p>
+        </div></div>
+        <div class="card"><div class="body">
+          <h3>Idle</h3>
+          <p>Buy better tools and afk grind away. Your character keeps working while you idle, click to gather faster, or leave it running while you play a REAL MMO.</p>
+        </div></div>
+        <div class="card"><div class="body">
+          <h3>Auto-battler</h3>
+          <p>Pick from 14 classes, be a tank, healer or DPS, and watch your character fight in side-view battles with live damage meters and upgrade your gear with Need/Greed loot rolls.</p>
+        </div></div>
+        <div class="card"><div class="body">
+          <h3>A simulated MMO</h3>
+          <p>Party Finder, fully functional auction house, guilds, 3v3 arena and a living chat where bots talk to each other and you!</p>
+        </div></div>
+      </div>
+
+      <!-- Gallery links open the full screenshot in the popup (app.js). -->
+      <h2>Screenshots</h2>
+      <div class="gallery">
+        <a href="../img/nobody-online/01-main-menu.png"><img src="../img/nobody-online/01-main-menu.png" alt="The Nobody Online main menu, with five of the 14 classes lined up."></a>
+        <a href="../img/nobody-online/02-woodcutting.png"><img src="../img/nobody-online/02-woodcutting.png" alt="Chopping yew in the Forest alongside bots, with live chat below."></a>
+        <a href="../img/nobody-online/04-dungeon-battle.png"><img src="../img/nobody-online/04-dungeon-battle.png" alt="A party fights through Ogre Fort, with a damage meter, healing meter and party chat."></a>
+        <a href="../img/nobody-online/05-arena.png"><img src="../img/nobody-online/05-arena.png" alt="A 3v3 arena match in the colosseum against a ranked bot team."></a>
+        <a href="../img/nobody-online/06-character-sheet.png"><img src="../img/nobody-online/06-character-sheet.png" alt="The character sheet: a level 79 Warlock with a succubus pet, stats and gear."></a>
+        <a href="../img/nobody-online/08-auction-house.png"><img src="../img/nobody-online/08-auction-house.png" alt="The auction house, where bots list gear and materials."></a>
+      </div>
+
+      <div class="feature-grid">
+        <div>
+          <h2>Recent Changes</h2>
+          <div class="card no-tilt"><div class="body">
+            <h3>0.3.1 &mdash; tester build</h3>
+            <p class="meta">Debug tab included</p>
+
+            <p class="meta">Races &amp; looks</p>
+            <ul>
+              <li>Every class now has race variants, recoloured in-game to your skin, hair and eye picks</li>
+              <li>New barbershop, Snip &amp; Sorcery, to restyle your character</li>
+              <li>The character creator now handles races</li>
+              <li>Racial head features no longer poke through hats and helmets</li>
+              <li>New Female body option</li>
+            </ul>
+
+            <p class="meta">Warlock overhaul</p>
+            <ul>
+              <li>New hand-drawn male and female Warlock models for every race, front and back, with idle animations</li>
+              <li>Walk animations in profile for both bodies, on every race</li>
+            </ul>
+
+            <p class="meta">Demon pets</p>
+            <ul>
+              <li>Succubus and Incubus rebuilt from scratch</li>
+              <li>Both have an idle and a whip-crack attack</li>
+              <li>Pets now show up in raids, standing behind their warlock</li>
+            </ul>
+
+            <p class="meta">Gameplay</p>
+            <ul>
+              <li>Alts: multiple characters in one shared world</li>
+              <li>Tools hit harder instead of faster: one swing a second, and clicks hit with the tool's power</li>
+              <li>Gathering scenes now match their zone and biome, with unique late-tier trees, ores and sea life</li>
+              <li>Crafting and cooking ask how many you want and stop once they're made</li>
+              <li>Enchanter's Tower: pick Enchanting or Disenchanting, plus a Disenchant All button with a confirmation</li>
+              <li>New vendor in Kettlecrown: Barnaby Bargainbin's market stall</li>
+            </ul>
+
+            <p class="meta">Debug</p>
+            <ul>
+              <li>Autoclicker now runs at 100 clicks/s</li>
+            </ul>
+          </div></div>
+        </div>
+        <div>
+          <h2>Upcoming Features</h2>
+          <div class="card no-tilt"><div class="body">
+            <h3>In progress</h3>
+            <ul>
+              <li><strong>Community Stats:</strong> opt-in, anonymous totals across all players, with community infographics to follow.</li>
+              <li><strong>New character art:</strong> detailed, hand-tuned character models for every race. The Warlock, with its Succubus and Incubus pets, is done, and the other classes are on the way.</li>
+              <li><strong>Full animation sets:</strong> walk, attack and idle for the new models, in battles, raids and around the world.</li>
+            </ul>
+
+            <h3>Coming soon</h3>
+            <ul>
+              <li><strong>Quest Board:</strong> pick up quests in Kettlecrown, such as slay, gather or craft, for bonus XP, gold and items. Quests keep progressing while you're offline.</li>
+              <li><strong>Dungeon Log:</strong> see each dungeon's monsters, bosses and loot, filling in as you discover them.</li>
+              <li><strong>Achievements:</strong> solo boss clears, challenge runs, and style-restricted kills like "all mages".</li>
+              <li><strong>Item icons:</strong> real icons for items and loot chests in place of text.</li>
+              <li><strong>Tutorial:</strong> a friendlier first hour for new adventurers.</li>
+              <li><strong>More music:</strong> tracks for every zone, with separate volume sliders for music, effects and interface.</li>
+            </ul>
+
+            <h3>On the horizon</h3>
+            <ul>
+              <li>Legendary raid items with unique traits, and Epic gear sets with set bonuses.</li>
+              <li>Level 80&ndash;90 content: new dungeons and whatever lies beyond the Stormcrown Spire.</li>
+              <li>A living auction house: prices driven by player-bot supply and demand, price history and trend charts, and selling directly to buy requests.</li>
+              <li>A world that feels alive: world events, bot rivalries that rise and fall, and cheaters you can catch in the act. One might one-shot your raid boss and get banned live by a GM.</li>
+              <li>Smarter parties: synced parties that scale bots to the dungeon's tier for bonus rewards, auto-refilling your group's missing roles, and bribing busy players to join you.</li>
+              <li>Guild reputation: some guilds are full of ninja looters, so watch for warning signs and rumours in chat.</li>
+              <li>Arena seasons: seasonal rewards and a team rating leaderboard.</li>
+              <li>Richer themes: textured interface themes such as stone, wood, starlight and dragon scale, each with its own fonts.</li>
+              <li>Mac and Linux builds.</li>
+            </ul>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- Discord community, filled in live from the server's widget.json by app.js -->
+      <h2>Community</h2>
+      <div class="card discord-card no-tilt"><div class="body">
+        <div class="discord-text">
+          <h3>Join the community</h3>
+          <p>Help test builds, report bugs and shape what gets made next on the Nobody Online Discord.</p>
+        </div>
+        <div class="discord-live">
+          <span class="status" id="discordOnline">Discord</span>
+          <ul class="discord-members" id="discordMembers"></ul>
+        </div>
+        <a class="link-btn" id="discordJoin" href="https://discord.com/widget?id=1560032346978259037&amp;theme=dark" target="_blank" rel="noopener">
+          <img src="../img/discord.svg" alt="">Join the Discord
+        </a>
+      </div></div>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">&copy; <span id="year"></span> Sean Clarke. All rights reserved.</footer>
+
+  <dialog id="lightbox" class="lightbox">
+    <button class="lightbox-close" aria-label="Close">&times;</button>
+    <div class="lightbox-content"></div>
+  </dialog>
+
+  <script src="../app.js"></script>
+
+  <!-- Cloudflare Web Analytics -->
+  <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "5fe3a69a4a2d48fd8ffd1a5743b8b7fc"}'></script>
+</body>
+</html>
